@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.14/jquery-ui.js"></script>
+    <script>
+        var socket = new WebSocket("ws://localhost:8182");
+
+        $(function () {
+            $("#framewrap")
+                .resizable()
+                .draggable()
+                .droppable()
+                .selectable();
+        });
+
+    </script>
+    <style type="text/css">
+
+        #framewrap {
+    min-width:560px;        
+    width:560px;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:5px;
+    padding-right:0px;
+    background-color:#B20000;
+}
+#frame {
+    width:500px;
+    background-color:#fff;
+    vertical-align:middle;
+}
+
+    </style>
+</head>
+<body>
+     <div id="framewrap">
+    <iframe id="frame" width="560" height="315" src="http://www.youtube.com/embed/dGG5GRLYgwM" frameborder="0" allowfullscreen="0"></iframe>
+  <br /><br /><textarea aria-multiline="true"> </textarea>    
+    </div>
+           
+
+    
+</body>
+</html>
