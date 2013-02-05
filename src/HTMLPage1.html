@@ -26,6 +26,17 @@
                 .selectable();
         });
 
+        function send(id, type, data) {
+            var data = {};
+
+            data.id = id;
+            data.type = type;
+            data.data = data;
+
+            var JSONdata = JSON.stringify(data);
+            socket.send(JSONdata);
+        }
+
     </script>
     <style type="text/css">
 
