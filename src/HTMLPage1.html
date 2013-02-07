@@ -8,6 +8,17 @@
     <script src="http://code.jquery.com/ui/1.8.14/jquery-ui.js"></script>
     <script>
         var socket = new WebSocket("ws://localhost:8182");
+        var currentID;
+
+        socket.onmessage = function (msg) {
+            var message = msg.data;
+            var data = JSON.parse(message);
+
+            if (data.id = currentID) {
+
+
+            }
+        }
 
         $(function () {
             $("#framewrap")
@@ -16,6 +27,17 @@
                 .droppable()
                 .selectable();
         });
+
+        function send(id, type, data) {
+            var data = {};
+
+            data.id = id;
+            data.type = type;
+            data.data = data;
+
+            var JSONdata = JSON.stringify(data);
+            socket.send(JSONdata);
+        }
 
     </script>
     <script>
