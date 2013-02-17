@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.8.14/jquery-ui.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     <script>
         var socket = new WebSocket("ws://localhost:8182");
         var currentID;
@@ -21,11 +21,10 @@
         }
 
         $(function () {
-            $("#framewrap")
-                .resizable()
-                .draggable()
-                .droppable()
-                .selectable();
+            $("#framewrap").resizable()
+            .droppable()
+            .draggable()
+            .selectable();
         });
 
         function send(id, type, data) {
@@ -71,6 +70,7 @@
         margin-left:0;
 }
     </style>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 </head>
 <body>
 
