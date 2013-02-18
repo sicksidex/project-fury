@@ -44,10 +44,12 @@
             document.getElementById('.framewrap').style.display = 'none';
         }
 
-        var str = '<div class="framewrap"><iframe class="frame" width="560" height="315" src="http://www.youtube.com/embed/dGG5GRLYgwM" frameborder="0" allowfullscreen="0"></iframe><br /><br /></div>';
-    var html = $.parseHTML(str);
+        var n = 1;
         
         function test() {
+            var str = '<div class="framewrap" id="test' + n + '"><iframe class="frame" width="560" height="315" src="http://www.youtube.com/embed/dGG5GRLYgwM" frameborder="0" allowfullscreen="0"></iframe><br /><br /></div>';
+            var html = $.parseHTML(str);
+
             $('body').append(html);
             $(".framewrap").resizable()
             .droppable()
@@ -83,6 +85,5 @@
 </head>
 <body>
     <button id="test" onclick="test()">Test</button>
-    <button id="test2" onclick="test2()">Test</button>
 </body>
 </html>
