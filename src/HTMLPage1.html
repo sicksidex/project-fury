@@ -8,33 +8,56 @@
     <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     <script>
         var socket = new WebSocket("ws://localhost:8182");
-        var currentID;
+        var currentID = 1;
+		var currentSrc;
 
         socket.onmessage = function (msg) {
             var message = msg.data;
-            var data = JSON.parse(message);
+            var package = JSON.parse(message);
 
-            if (data.id = currentID) {
+            if (package.id = currentID) {
+				switch(package.type){
+					case "youtube":
+						var str = '<div class="framewrap" id="test' + n + '">		<iframe class="frame" width="560" height="315" src="' + package.data + '" frameborder="0" allowfullscreen="0"></iframe><br /><br /></div>';
+            			var html = $.parseHTML(str);
 
+            			$('body').append(html);
+            			$(".framewrap").resizable()
+							.draggable({
+								start: function(){
+									currentSrc = $(this).find("iframe").attr("src").toString();
+									console.log(currentSrc);
+					}
+					})
+					.selectable();
+					
+				}
 
             }
         }
 
         $(function () {
-            $(".framewrap").resizable()
-            .droppable()
-            .draggable()
-            .selectable();
+           $("#drop").droppable({
+			   drop: function(event,ui){
+				   var id = currentID;
+				   var type = "youtube";
+				   var data = currentSrc;
+				   console.log(data);
+				   send(id, type, data);
+			   }
+			   });
         });
 
         function send(id, type, data) {
-            var data = {};
+            var package = {};
 
-            data.id = id;
-            data.type = type;
-            data.data = data;
+            package.id = id;
+            package.type = type;
+            package.data = data;
+			
+			console.log(package);
 
-            var JSONdata = JSON.stringify(data);
+            var JSONdata = JSON.stringify(package);
             socket.send(JSONdata);
         }
     
@@ -52,9 +75,13 @@
 
             $('body').append(html);
             $(".framewrap").resizable()
-            .droppable()
-            .draggable()
-            .selectable();
+			.draggable({
+				start: function(){
+					currentSrc = $(this).find("iframe").attr("src").toString();
+					console.log(currentSrc);
+					}
+					})
+			.selectable();
         }
 
     </script>
@@ -85,5 +112,7 @@
 </head>
 <body>
     <button id="test" onclick="test()">Test</button>
+    <div style="background-color:red; width:500px; height:450px;" align="left" id="drop"></div>
+     
 </body>
 </html>
